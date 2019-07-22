@@ -1,0 +1,9 @@
+spring:
+#  data:
+#    redis:
+#      repositories:
+#        enabled: true
+        
+        
+  redis:    host: 192.168.167.15
+    port: 6379
