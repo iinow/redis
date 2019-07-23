@@ -18,8 +18,8 @@ import com.ha.repository.PersonRepository;
 @Service
 public class PersonService {
 
-	@Autowired
-	private PersonRepository repository;
+//	@Autowired
+//	private PersonRepository repository;
 	
 //	@Autowired
 //	private RedisTemplate<Object, Object> template;
@@ -27,7 +27,7 @@ public class PersonService {
 //	@Transactional
 	public List<Person> findAllPerson(){
 		List<Person> list = new ArrayList<>();
-		repository.findAll().iterator().forEachRemaining(list::add);
+//		repository.findAll().iterator().forEachRemaining(list::add);
 		return list;
 	}
 	
@@ -41,8 +41,8 @@ public class PersonService {
 //				return null;
 //			}
 //		});
-		Person s = repository.save(person);
-		return s;
+//		Person s = repository.save(person);
+		return null;
 //		throw new Exception("test");
 //		return repository.save(person);
 	}

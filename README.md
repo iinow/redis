@@ -28,3 +28,11 @@
 - Bitmaps
     - setbit
     - getbit
+
+Redis Event 종류
+
+message : Channel 에서 온 메시지 
+
+subscribe : Channel 이름으로 구독한다.
+
+psubscribe : Channel 이름 패턴으로 검색해서 구독한다. 
