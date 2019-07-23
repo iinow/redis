@@ -15,6 +15,11 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9.1'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+	// implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.9.1'
+	
 	compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

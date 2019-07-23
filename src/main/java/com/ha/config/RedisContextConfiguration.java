@@ -1,49 +1,58 @@
 package com.ha.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.ha.entity.Address;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @EnableTransactionManagement
 public class RedisContextConfiguration {
 	
-	@Value(value = "${spring.redis.host}")
-	private	String host;
+	@Autowired
+	private AppConfig config;
 	
-	@Value(value = "${spring.redis.port}")
-	private	int port;
-	
-	@Value(value = "${spring.redis.database}")
-	private	int index;
+//	@Autowired
+//	private RedisTemplate<Object, Object> template;
+//	
+//	@Constru
+//	public void init() {
+//		template.setEnableTransactionSupport(true);
+//		template.setKeySerializer(new StringRedisSerializer());
+////		redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+//	}
 
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		RedisStandaloneConfiguration standConfig = new RedisStandaloneConfiguration();
-		standConfig.setHostName(host);
-		standConfig.setPort(port);
-		standConfig.setDatabase(index);
+		standConfig.setHostName(config.getRedis().getHost());
+		standConfig.setPort(config.getRedis().getPort());
+		standConfig.setDatabase(config.getRedis().getDatabase());
 		return new LettuceConnectionFactory(standConfig);
 	}
 
 	@Bean
-	public RedisTemplate<String, Address> redisTemplate() {
-		RedisTemplate<String, Address> redisTemplate = new RedisTemplate<>();
+	public RedisTemplate<String, Object> redisTemplate() {
+		ObjectMapper objectMapper = new ObjectMapper();
+//	    objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+//	    objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+//	    objectMapper.registerModule(new JavaTimeModule());
+	    
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setEnableTransactionSupport(true);
 		redisTemplate.setConnectionFactory(redisConnectionFactory());
-//		redisTemplate.setKeySerializer(new StringRedisSerializer());
-//		redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+//		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+		redisTemplate.setValueSerializer(new StringRedisSerializer());
 		return redisTemplate;
 	}
 }

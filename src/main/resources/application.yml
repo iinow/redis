@@ -4,9 +4,15 @@ spring:
 #      repositories:
 #        enabled: true
         
-  redis:    host: 192.168.0.219
+  redis:    host: 192.168.167.15
     port: 6379
     database: 0
 #    lettuce:#      pool:#        max-active: 10
 #        max-idle: 10
 #        min-idle: 2
+
+app:
+  redis:
+    host: 192.168.167.15
+    port: 6379
+    database: 0

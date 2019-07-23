@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import lombok.Data;
 import lombok.ToString;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Data
 @ToString
@@ -18,4 +19,7 @@ public class Address implements Serializable {
 	private String id;
 	private String addr;
 	private Integer postnum;
+	
+//	@JsonIgnore
+//	private String _class;
 }
