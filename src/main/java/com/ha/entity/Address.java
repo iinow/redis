@@ -1,13 +1,11 @@
 package com.ha.entity;
 
-import java.io.Serializable;
-
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-import lombok.Data;
-import lombok.ToString;
-import net.minidev.json.annotate.JsonIgnore;
+import java.io.Serializable;
 
 @Data
 @ToString
@@ -19,7 +17,4 @@ public class Address implements Serializable {
 	private String id;
 	private String addr;
 	private Integer postnum;
-	
-//	@JsonIgnore
-//	private String _class;
 }

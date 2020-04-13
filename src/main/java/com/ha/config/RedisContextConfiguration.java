@@ -1,35 +1,24 @@
 package com.ha.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @EnableTransactionManagement
 public class RedisContextConfiguration {
 	
-	@Autowired
-	private AppConfig config;
-	
-//	@Autowired
-//	private RedisTemplate<Object, Object> template;
-//	
-//	@Constru
-//	public void init() {
-//		template.setEnableTransactionSupport(true);
-//		template.setKeySerializer(new StringRedisSerializer());
-////		redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-//	}
+	private final AppConfig config;
+
+	public RedisContextConfiguration(AppConfig config) {
+		this.config = config;
+	}
 
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
@@ -53,6 +42,7 @@ public class RedisContextConfiguration {
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 //		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
 		redisTemplate.setValueSerializer(new StringRedisSerializer());
+		LettuceConnectionFactory factory = new LettuceConnectionFactory();
 		return redisTemplate;
 	}
 }

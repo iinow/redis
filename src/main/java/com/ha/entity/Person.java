@@ -1,17 +1,15 @@
 package com.ha.entity;
 
-import java.io.Serializable;
-
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-import lombok.Data;
-import lombok.ToString;
+import java.io.Serializable;
 
 @Data
 @ToString
-
-//value °ªÀ» ÁöÁ¤ÇÏÁö ¾ÊÀ¸¸é ÇØ´ç Å¬·¡½ºÀÇ ÆĞÅ°Áö °æ·Î·Î µé¾î°¡°Ô µÈ´Ù.
+//value ê°’ì„ ì§€ì •í•˜ì§€ ì•Šìœ¼ë©´ í•´ë‹¹ í´ë˜ìŠ¤ì˜ íŒ¨í‚¤ì§€ ê²½ë¡œë¡œ ë“¤ì–´ê°€ê²Œ ëœë‹¤.
 @RedisHash(value = "person")
 public class Person implements Serializable {
 	private static final long serialVersionUID = -2861272462918118911L;
