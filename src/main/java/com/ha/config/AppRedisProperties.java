@@ -9,14 +9,9 @@ import lombok.Data;
 @Data
 @Component
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "app")
-public class AppConfig {
-	private AppRedisConfig redis;
-
-	@Data
-	public static class AppRedisConfig {
-		private String host;
-		private int port;
-		private int database;
-	}
+@ConfigurationProperties(prefix = "app.redis")
+public class AppRedisProperties {
+	private String host;
+	private int port;
+	private int database;
 }

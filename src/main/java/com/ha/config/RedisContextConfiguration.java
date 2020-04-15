@@ -10,27 +10,28 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.nio.charset.StandardCharsets;
+
 @Configuration
 @EnableTransactionManagement
 public class RedisContextConfiguration {
-	
-	private final AppConfig config;
 
-	public RedisContextConfiguration(AppConfig config) {
-		this.config = config;
+	private final AppRedisProperties redisProperties;
+
+	public RedisContextConfiguration(AppRedisProperties redisProperties) {
+		this.redisProperties = redisProperties;
 	}
 
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		RedisStandaloneConfiguration standConfig = new RedisStandaloneConfiguration();
-		standConfig.setHostName(config.getRedis().getHost());
-		standConfig.setPort(config.getRedis().getPort());
-		standConfig.setDatabase(config.getRedis().getDatabase());
+		standConfig.setHostName(redisProperties.getHost());
+		standConfig.setPort(redisProperties.getPort());
+		standConfig.setDatabase(redisProperties.getDatabase());
 		return new LettuceConnectionFactory(standConfig);
 	}
 
-	@Bean
-	public RedisTemplate<String, Object> redisTemplate() {
+	@Bean public RedisTemplate<String, Object> redisTemplate() {
 		ObjectMapper objectMapper = new ObjectMapper();
 //	    objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
 //	    objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
@@ -42,6 +43,8 @@ public class RedisContextConfiguration {
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 //		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
 		redisTemplate.setValueSerializer(new StringRedisSerializer());
+		redisTemplate.setHashKeySerializer(new StringRedisSerializer(StandardCharsets.UTF_8));
+		redisTemplate.setHashValueSerializer(new StringRedisSerializer(StandardCharsets.UTF_8));
 		LettuceConnectionFactory factory = new LettuceConnectionFactory();
 		return redisTemplate;
 	}

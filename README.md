@@ -1,7 +1,8 @@
 # redis
 
-## µ¥ÀÌÅÍ Å¸ÀÔ 
-ÂüÁ¶ : [https://kimpaper.github.io/2016/07/27/redis-datatype/]
+## ë°ì´í„° íƒ€ì…
+
+ì°¸ì¡° : [https://kimpaper.github.io/2016/07/27/redis-datatype/]
 
 - Strings
     - set
@@ -29,10 +30,10 @@
     - setbit
     - getbit
 
-Redis Event Á¾·ù
+Redis Event ì¢…ë¥˜
 
-message : Channel ¿¡¼­ ¿Â ¸Ş½ÃÁö 
+message : Channel ì—ì„œ ì˜¨ ë©”ì‹œì§€
 
-subscribe : Channel ÀÌ¸§À¸·Î ±¸µ¶ÇÑ´Ù.
+subscribe : Channel ì´ë¦„ìœ¼ë¡œ êµ¬ë…í•œë‹¤.
 
-psubscribe : Channel ÀÌ¸§ ÆĞÅÏÀ¸·Î °Ë»öÇØ¼­ ±¸µ¶ÇÑ´Ù. 
+psubscribe : Channel ì´ë¦„ íŒ¨í„´ìœ¼ë¡œ ê²€ìƒ‰í•´ì„œ êµ¬ë…í•œë‹¤.
