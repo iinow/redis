@@ -1,5 +1,5 @@
 module.exports = {
-  base: 'redis',
+  base: '/redis/',
   title: 'Redis + Spring Start',
   description: 'Redis 설치 방법부터 Spring boot 연동 방법, Redis 기능 사용까지!!',
   themeConfig: {
@@ -40,5 +40,12 @@ module.exports = {
   },
   markdown: {
     lineNumbers: true
-  }
+  },
+  plugins: [
+    "@vuepress/back-to-top",
+    [
+      "@vuepress/google-analytics"
+    ],
+    "@vuepress/nprogress"
+  ]
 }
