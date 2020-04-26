@@ -32,10 +32,10 @@ cluster-node-timeout 5000
 appendonly yes
 
 # 저장 후 
-redis-cli $REDIS_HOME/redis1.conf &
-redis-cli $REDIS_HOME/redis2.conf &
-redis-cli $REDIS_HOME/redis3.conf &
-redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003
+redis-server $REDIS_HOME/redis1.conf &
+redis-server $REDIS_HOME/redis2.conf &
+redis-server $REDIS_HOME/redis3.conf &
+redis-cli --cluster create 127.0.0.1:6301 127.0.0.1:6302 127.0.0.1:6303
 ```
 
 ## 클러스터 구성 확인
