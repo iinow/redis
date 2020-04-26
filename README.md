@@ -1,8 +1,12 @@
 # redis
 
+> [블로그](https://iinow.github.io/redis)
+
 ## 데이터 타입
 
-참조 : [https://kimpaper.github.io/2016/07/27/redis-datatype/]
+### 참조
+  1. [https://kimpaper.github.io/2016/07/27/redis-datatype/]
+  2. [http://redisgate.kr/]
 
 - Strings
     - set
