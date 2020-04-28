@@ -26,7 +26,8 @@ module.exports = {
         children: [
           '/redis/port',
           '/redis/auth',
-          '/redis/cluster'
+          '/redis/cluster',
+          '/redis/replica'
         ]
       }
     ]
