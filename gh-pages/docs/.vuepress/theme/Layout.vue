@@ -1,6 +1,6 @@
 <template>
     <ParentLayout >
-        <Disqus slot="page-bottom" v-if="this.$frontmatter.disqus" class="content"/>
+        <Disqus slot="page-bottom" v-if="!this.$frontmatter.disqus" class="content"/>
     </ParentLayout>
 </template>
 

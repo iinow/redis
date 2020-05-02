@@ -2,6 +2,10 @@ module.exports = {
   base: '/redis/',
   title: 'Redis + Spring Start',
   description: 'Redis 설치 방법부터 Spring boot 연동 방법, Redis 기능 사용까지!!',
+  head: [
+    ['link', { rel: "icon", href: "/favicon.png"}]
+  ],
+  theme: '@vuepress/blog',
   themeConfig: {
     navbar: true,
     nav: [
@@ -31,6 +35,9 @@ module.exports = {
         ]
       }
     ]
+  },
+  frontMatter: {
+    foo: 'bar'
   },
   configureWebpack: {
     resolve: {

@@ -10,6 +10,9 @@ vim $REDIS_HOME/redis.conf
 
 # replicaof <masterip> <masterport>
 replicaof 127.0.0.1 6301
+
+# 마스터 redis 서버에 패스워드 설정되어 있을 경우 `masterauth` 라는 값에 패스워드를 입력해주면 된다. 
+masterauth 123123123
 ```
 
 * 사용할 때 마스터 서버를 실행한 후 복제본 서버를 실행한다. 
