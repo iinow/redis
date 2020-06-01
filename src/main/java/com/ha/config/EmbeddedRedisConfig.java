@@ -1,9 +1,8 @@
 package com.ha.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
 import redis.embedded.RedisServer;
 
 import javax.annotation.PreDestroy;
@@ -13,16 +12,16 @@ import java.io.IOException;
 @Configuration
 public class EmbeddedRedisConfig {
 
-    private final AppRedisProperties redisProperties;
+    private final RedisProperties redisProperties;
 
     private RedisServer redisServer;
 
-    public EmbeddedRedisConfig(AppRedisProperties redisProperties) throws IOException {
+    public EmbeddedRedisConfig(RedisProperties redisProperties) throws IOException {
         this.redisProperties = redisProperties;
+        redisServer();
     }
 
-    @EventListener(ApplicationStartedEvent.class)
-    public void redisServer() throws IOException {
+    private void redisServer() throws IOException {
         redisServer = new RedisServer(redisProperties.getPort());
         redisServer.start();
     }

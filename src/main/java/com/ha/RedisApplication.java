@@ -4,9 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+
+import javax.annotation.PostConstruct;
 
 @Slf4j
 @SpringBootApplication
@@ -17,19 +18,14 @@ public class RedisApplication {
 	}
 
 	@Autowired
-	private RedisTemplate<String, String> clusterRedisTemplate;
+	private RedisConnectionFactory redisConnectionFactory;
 
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private ReactiveRedisConnectionFactory reactiveRedisConnectionFactory;
 
-	@EventListener(ApplicationReadyEvent.class)
+	@PostConstruct
 	public void init() {
-		clusterRedisTemplate.opsForValue().set("test", "dkdkd");
-		String value = clusterRedisTemplate.opsForValue().get("test");
-
-//		redisTemplate.opsForValue().set("haha", "hahaha2");
-		Object value2 = redisTemplate.opsForValue().get("test");
-
-		log.info(value + ", " + value2);
+		log.info(redisConnectionFactory.toString());
+		log.info(reactiveRedisConnectionFactory.toString());
 	}
 }

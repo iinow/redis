@@ -5,21 +5,25 @@ import com.ha.common.type.RedisTopicType;
 import com.ha.message.TestMessage;
 import com.ha.publisher.AbstractRedisSubscriber;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Slf4j
+@Lazy
 @Service
 public class RedisSubscriber extends AbstractRedisSubscriber {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    @Lazy
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
-    public RedisSubscriber(RedisTemplate<String, Object> redisTemplate) {
+    public RedisSubscriber() {
         super(RedisTopicType.T1);
-        this.redisTemplate = redisTemplate;
     }
 
     @Override
